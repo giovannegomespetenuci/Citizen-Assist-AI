@@ -1,0 +1,11 @@
+data,origem,pergunta,id_orientacao,encontrou,ajudou,tentativas,tempo_segundos
+2026-11-12 14:10:05,pergunta,Como faço o cartão do sus?,1,True,True,1,12.4
+2026-11-12 14:15:22,pergunta,onde agendar consulta no posto de saude,2,True,True,1,10.8
+2026-11-12 14:22:11,pergunta,remedio gratis farmacia popular,3,True,True,1,15.1
+2026-11-12 14:30:40,pergunta,como tirar novo rg cin,4,True,True,1,16.5
+2026-11-12 14:38:19,pergunta,baixar carteira de trabalho digital,5,True,True,1,11.2
+2026-11-12 14:45:01,pergunta,regularizar cpf suspenso,6,True,True,1,13.9
+2026-11-12 14:52:33,pergunta,certidao de quitacao eleitoral,7,True,True,1,9.7
+2026-11-12 15:01:10,pergunta,como fazer inscricao no cadunico,8,True,True,1,18.3
+2026-11-12 15:10:44,pergunta,desconto na conta de luz tarifa social,9,True,True,1,14.6
+2026-11-12 15:20:00,pergunta,como solicitar isencao do iptu para idoso,,False,False,2,19.5
