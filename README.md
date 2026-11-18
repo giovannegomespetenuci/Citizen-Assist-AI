@@ -33,14 +33,16 @@ O **Citizen Assist AI** é uma solução em Python desenvolvida para simplificar
 
    ```bash
    git clone https://github.com/giovannegomespetenuci/Citizen-Assist-AI.git
-   cd citizen-assist-ai
+   cd Citizen-Assist-AI
    ```
 
-Execute o assistente:
+3. Execute o assistente (não há bibliotecas externas nem etapa de compilação):
 
-```bash
-python main.py
-```
+   ```bash
+   python main.py
+   ```
+
+4. Na tela de perfil, escolha de 1 a 4 (ou Enter para o modo Dinâmico). No menu principal, a opção **3 (Gestão de registros e operações)** abre as operações de DSA: listar, consultar por ID, cadastrar, atualizar, excluir, pesquisar e ordenar. Para sair, digite `0` e `0` e informe a nota de facilidade de uso (1 a 5).
 
 ## 5. Regra de Pontuação e Busca Inteligente
 
@@ -72,15 +74,32 @@ citizen-assist-ai/
     └── avaliacoes.json
 ```
 
-Análise de Complexidade Assintótica (Notação Big-O):
+### Estrutura de dados (DSA)
 
-Inserção na Lista Encadeada (inserir): $O(n)$ no pior caso (percurso até o fim da lista).
+Os registros ficam em uma **lista encadeada simples** implementada pela equipe (`No` e `ListaEncadeada`, em `base_conhecimento.py`). Cada nó guarda uma `Orientacao` em `conteudo` e a referência ao próximo nó em `proximo`; a lista guarda `inicio` e o contador `_tamanho`. Não há ponteiro para o último nó. Operações: `inserir` (no fim), `listar_todos`, `buscar_por_id`, `atualizar_por_id`, `remover_por_id` (trata início, meio, fim e lista de um nó), `pesquisar`, `ordenar_por_id` e `ordenar_por_titulo`.
 
-Busca por ID e Pesquisa por Atributo (buscar_por_id / pesquisar): $O(n)$ (percurso linear).
+### Algoritmos de busca e ordenação
 
-Atualização e Exclusão na Lista Encadeada (atualizar_por_id / remover_por_id): $O(n)$ (ajuste manual de ponteiros nos nós).
+* **Busca sequencial por ID:** percorre os nós até achar o id (usada na consulta, no cadastro para recusar ID duplicado, na atualização e na exclusão). Busca binária não compensa em lista encadeada, pois chegar ao meio já custa O(n).
+* **Pesquisa por atributo:** percorre todos os nós e verifica se o termo, normalizado (minúsculas, sem acento e sem pontuação), está contido no título, na categoria ou no público-alvo.
+* **Ordenação:** Bubble Sort com sinalizador de troca sobre os nós da lista. Troca o **conteúdo** dos nós vizinhos fora de ordem (e não os ponteiros) e repete até uma passada sem trocas. A chave é o `id` ou o título normalizado.
 
-Ordenação Encadeada (ordenar_por_id / ordenar_por_titulo): $O(n^2)$ usando o algoritmo Bubble Sort sobre os nós encadeados.
+### Análise de complexidade (Big-O)
+
+Hipóteses: **n** = número de registros (nós); **L** = comprimento máximo do texto de um campo; a lista não mantém ponteiro para o último nó; custos de leitura e gravação do JSON e de entrada e saída não são considerados.
+
+| Operação | Melhor caso | Pior caso | Espaço extra | Observação |
+|---|---|---|---|---|
+| Inserção no fim | O(1) | O(n) | O(1) | Lista vazia: O(1). Senão, percorre até o último nó. |
+| Busca por ID | O(1) | O(n) | O(1) | Melhor: primeiro nó. Pior: último nó ou ID inexistente. |
+| Pesquisa por atributo | O(n·L) | O(n·L) | O(r) | Sempre percorre os n nós e normaliza 3 campos (r = nº de resultados). |
+| Atualização | O(1) | O(n) | O(1) | Localiza o nó e troca o `conteudo`. |
+| Exclusão | O(1) | O(n) | O(1) | Localiza o nó e religa os ponteiros em O(1). |
+| Ordenação por ID (Bubble Sort) | O(n) | O(n²) | O(1) | Melhor: lista já ordenada (uma passada). Pior: ordem inversa (n passadas). |
+| Ordenação por título | O(n·L) | O(n²·L) | O(1) | Cada comparação normaliza dois títulos. |
+| Carga do JSON (n inserções) | O(n²) | O(n²) | O(n) | Consequência da inserção O(n): 0 + 1 + ... + (n−1) passos. |
+
+A documentação técnica completa de DSA (objetivo, campos dos registros, descrição da lista encadeada, organização do código, instruções de uso, algoritmos e Big-O) e as evidências dos testes estão no arquivo `Testes_e_Demonstrações.docx`, incluído no repositório.
 
 ## 7. Resultado dos Testes com Usuários Reais
 

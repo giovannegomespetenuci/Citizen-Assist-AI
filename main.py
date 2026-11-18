@@ -7,7 +7,6 @@ from assistente import Assistente
 from base_conhecimento import BaseConhecimento
 from orientacao import Orientacao
 
-
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 MODOS_ACESSIBILIDADE = {
@@ -27,7 +26,7 @@ NOMES_MODOS = {
 
 def selecionar_perfil():
     print("\n" + "=" * 65)
-    print("--- SELEÇÃO DE PERFIL DE ACESSIBILIDADE (ideia.pdf) ---")
+    print("--- SELEÇÃO DE PERFIL DE ACESSIBILIDADE ---")
     print("=" * 65)
     print(" 1. Modo Dinâmico - Respostas objetivas em tópicos")
     print(" 2. Modo Guiado - Explicações acolhedoras com dicas visuais")
@@ -60,10 +59,10 @@ def ler_campo_validado(prompt, validacao_fn, msg_erro):
         print(f"[ERRO] {msg_erro}")
 
 
-def menu_crud_dsa(base):
+def menu(base):
     while True:
         print("\n" + "=" * 65)
-        print("--- GESTÃO DE REGISTROS DA BASE DE DADOS (DSA) ---")
+        print("--- GESTÃO DE REGISTROS DA BASE DE DADOS ---")
         print("=" * 65)
         print(" 1. Listar todas as orientações")
         print(" 2. Consultar orientação por ID")
@@ -121,7 +120,7 @@ def menu_crud_dsa(base):
                 "Título não pode ser vazio.",
             )
             publico_alvo = ler_campo_validado(
-                "Público-Alvo (Requisito DSA): ",
+                "Público-Alvo: ",
                 lambda valor: len(valor) > 0,
                 "Público-alvo não pode ser vazio.",
             )
@@ -360,9 +359,9 @@ def main():
         print("=" * 65)
         print(" 1. Fazer pergunta ao assistente (Texto livre)")
         print(" 2. Navegar por categorias de serviços")
-        print(" 3. Gestão de registros e operações CRUD (DSA)")
-        print(" 4. Alternar Perfil de Acessibilidade (ideia.pdf)")
-        print(" 5. Ver indicadores de atendimento (PCP)")
+        print(" 3. Gestão de registros e operações") # Requisito DSA: CRUD completo da base de conhecimento
+        print(" 4. Alternar Perfil de Acessibilidade")
+        print(" 5. Ver indicadores de atendimento") # Requisito PCP: Exibir métricas de desempenho do assistente
         print(" 6. Exportar relatório completo para CSV")
         print(" 0. Sair do sistema")
 
@@ -372,7 +371,7 @@ def main():
         elif opcao == "2":
             assistente.navegar(modo=modo_ativo)
         elif opcao == "3":
-            menu_crud_dsa(base)
+            menu(base)
         elif opcao == "4":
             modo_ativo = selecionar_perfil()
         elif opcao == "5":
