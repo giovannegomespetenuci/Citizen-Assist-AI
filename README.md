@@ -140,4 +140,4 @@ Sensibilidade a Erros Ortográficos Severos: A busca por regras exige que as pal
 
 ## 10. Link do Vídeo Técnico (YouTube)
 
-URL do Vídeo (Não Listado):
+URL do Vídeo (Não Listado): https://youtu.be/8GPG6BHXH7Q
